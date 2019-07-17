@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h2>Recently asked questions:</h2>
+  {% if question_list %}    
+    {% for question in question_list %}
+      
+        <div class="questions" style='margin-top: 40px'>
+        <div><p>{{ question.title }}</p></div>
+        <div><p>{{ question.ques_body }}</p></div>
+        <div><p>{{ question.author }}</p></div>
+        <div>added&nbsp;{{ question.ques_date_added }}
+
+    
+        {% endfor %}
+  {% else %}
+    <p>There are no questions in the list.</p>
+  {% endif %}       
+{% endblock %}
