@@ -23,7 +23,7 @@ class Question(models.Model):
         
         return reverse('index')
 
-class Answer(model.Model):
+class Answer(models.Model):
 
     question_answered = models.ForeignKey(to=Question, on_delete=models.CASCADE)
     ans_body = models.TextField()
@@ -40,7 +40,7 @@ class Answer(model.Model):
     class Meta:
         ordering = ['-date_added']
 
-class Star(model.Model):
+class Star(models.Model):
 
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     star_answer = models.ForeignKey(to=Answer, on_delete=models.CASCADE)
