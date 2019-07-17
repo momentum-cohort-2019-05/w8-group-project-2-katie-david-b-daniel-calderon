@@ -106,11 +106,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-<<<<<<< HEAD
-TIME_ZONE = 'america/new_york'
-=======
 TIME_ZONE = 'America/New_York'
->>>>>>> master
+
 
 USE_I18N = True
 
