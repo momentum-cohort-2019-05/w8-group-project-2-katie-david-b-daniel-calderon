@@ -16,15 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf.urls import url
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.default.urls')),
 ]
 
 urlpatterns += [
     path('core/', include('core.urls')),
-    path('accounts/', include('registration.backends.default.urls')),
+    
 ]
 
 #Add URL maps to redirect the base URL to our application
