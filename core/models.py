@@ -9,7 +9,7 @@ class Question(models.Model):
     title = models.CharField(max_length=200)
     ques_body = models.TextField()
     author = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
-    ans_correct = models.OneToOneField(to="Answer", on_delete=models.SET_NULL, null=True) 
+    ans_correct = models.OneToOneField(to="Answer", on_delete=models.SET_NULL, null=True, blank=True) 
     ques_date_added = models.DateField(auto_now_add=True)
     ques_likes = models.PositiveIntegerField(default=0)
 
