@@ -32,7 +32,7 @@ class Answer(models.Model):
     ans_likes = models.PositiveIntegerField(default=0)
     
     def __str__(self):
-        pass
+        return f"{self.question_answered.title}{self.content}"
 
     def get_absolute_url(self):
         pass
