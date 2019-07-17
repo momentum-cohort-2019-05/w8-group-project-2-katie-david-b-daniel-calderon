@@ -24,6 +24,7 @@ urlpatterns = [
 
 urlpatterns += [
     path('core/', include('core.urls')),
+    path(r'^accounts/', include('registration.backends.default.urls')),
 ]
 
 #Add URL maps to redirect the base URL to our application
