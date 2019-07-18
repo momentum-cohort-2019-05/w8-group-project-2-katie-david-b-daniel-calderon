@@ -5,7 +5,7 @@ from django.urls import include
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('question_detail/<int:pk>', views.question_detail, name='question-detail'),
+    path('question_detail/<pk>', views.question_detail, name='question-detail'),
     path('new_question/', views.create_question, name='new-question'),
-    
+
 ]
