@@ -3,7 +3,10 @@ from django.shortcuts import render
 from core.models import Question, Answer, Star
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from .forms import AddQuestion
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def index(request):
@@ -42,3 +45,19 @@ def question_detail(request, pk):
    }
 
    return render(request, 'core/question_detail.html', context=context)
+
+def create_question(request):
+    if request.method == 'POST':
+        form = AddQuestion(request.POST)
+        if form.is_valid():
+            question = Question.objects.create(title=form.cleaned_data['title'])
+            question.save()
+            return HttpResponseRedirect(reverse('question-detail', args=[question.pk]))
+    else:
+        form = AddQuestion()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'core/new_question.html', context)
