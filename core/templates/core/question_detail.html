@@ -6,13 +6,17 @@
 
 <h1>Question Detail - {{ question.title }}</h1>
 
-{% if question %}   
+{% if question %}
 
-    <p>{{ question.ques_body }}</a>&nbsp;&nbsp;by:&nbsp;{{ question.author }}</p>
+        <p>{{ question.ques_body }}&nbsp;&nbsp;by:&nbsp;{{ question.author }}</p>
 
-    <p>Added: {{ question.ques_date_added }}</p>
+        <p>Added: {{ question.ques_date_added }}</p>
 
-    <p>{{ answer.ans_body }}</p>
+            {% for answer in answer %}
+
+                <p>{{ answer.ans_body }}</p>
+
+            {% endfor %}
 
 
     {% else %}
