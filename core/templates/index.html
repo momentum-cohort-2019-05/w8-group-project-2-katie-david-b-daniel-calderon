@@ -8,6 +8,7 @@
     {% for question in question_list %}
       
         <div class="questions" style='margin-top: 40px'>
+        <div><p><a href="{% url 'question-detail' pk=question.pk %}">{{ question }}</a></p></div>
         <div><p>{{ question.title }}</p></div>
         <div><p>{{ question.ques_body }}</p></div>
         <div><p>{{ question.author }}</p></div>

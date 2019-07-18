@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<h1>Question Detail - {{ question.title }}</h1>
+
+{% if question %}    
+
+    <p>{{ question.ques_body }}</a>&nbsp;&nbsp;by:&nbsp;{{ question.author}}</p>
+
+    <p>Added: {{ question.ques_date_added }}</p>
+
+    {% else %}
+
+        <p>There are no questions in the list.</p>
+
+{% endif %}       
+
+
+
+
+
+
+{% endblock %}

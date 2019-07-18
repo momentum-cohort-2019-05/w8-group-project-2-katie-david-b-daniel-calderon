@@ -24,3 +24,21 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
+
+
+
+def question_detail(request, pk):
+   question = get_object_or_404(Question, pk=pk)
+#    answer = Answer.objects.filter(answer=answer)
+
+#     avg_record = records.aggregate(Avg('actual'))['actual__avg']
+#     max_record = records.aggregate(Max('actual'))['actual__max']
+
+   context = {
+       'question': question,
+    #    'answer': answer,
+       # 'avg_record': avg_record,
+       # 'max_record': max_record,
+   }
+
+   return render(request, 'core/question_detail.html', context=context)
