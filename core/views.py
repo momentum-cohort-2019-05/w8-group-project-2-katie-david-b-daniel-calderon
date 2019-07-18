@@ -13,17 +13,10 @@ def index(request):
     """View function for home page of site."""
 
     question_list = Question.objects.all()
-      
-    #category_list = Category.objects.all()
-
-    #category = Book.category
-
-
 
     context = {
         'question_list': question_list,
-#       'category': category,
-#       'category_list': category_list,
+
     }
 
     return render(request, 'index.html', context=context)
@@ -34,14 +27,10 @@ def question_detail(request, pk):
    question = get_object_or_404(Question, pk=pk)
    answers = Answer.objects.filter(question_answered=question)
 
-#     avg_record = records.aggregate(Avg('actual'))['actual__avg']
-#     max_record = records.aggregate(Max('actual'))['actual__max']
-
    context = {
        'question': question,
        'answers': answers,
-       # 'avg_record': avg_record,
-       # 'max_record': max_record,
+
    }
 
    return render(request, 'core/question_detail.html', context=context)
