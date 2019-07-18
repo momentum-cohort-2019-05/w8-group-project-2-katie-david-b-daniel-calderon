@@ -29,14 +29,14 @@ def index(request):
 
 def question_detail(request, pk):
    question = get_object_or_404(Question, pk=pk)
-#    answer = Answer.objects.filter(answer=answer)
+   answer = get_object_or_404(Answer, pk=pk)
 
 #     avg_record = records.aggregate(Avg('actual'))['actual__avg']
 #     max_record = records.aggregate(Max('actual'))['actual__max']
 
    context = {
        'question': question,
-    #    'answer': answer,
+       'answer': answer,
        # 'avg_record': avg_record,
        # 'max_record': max_record,
    }
