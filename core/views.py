@@ -63,10 +63,10 @@ def create_question(request):
 def user_profile(request, pk):
 
     all_questions = Question.objects.all()
-    question_list = all_questions.filter(pk=pk)
+    question_list = all_questions.filter(author__pk=pk)
         
     context = {
-        'question_list': question_list
+        'question_list': question_list,
     }
     
     return render(request, 'core/user_profile.html', context)
@@ -77,4 +77,4 @@ def delete_question(request, pk):
     question = Question.objects.get(pk=pk)
     if request.user == question.author:
         question.delete()
-    return redirect(to='index', pk=request.user.pk)
+    return redirect(to='index')

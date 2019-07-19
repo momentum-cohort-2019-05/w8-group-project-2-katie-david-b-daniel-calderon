@@ -3,10 +3,12 @@
 {% block content %}
 
 
-{% for question in question_list %}
+
+<p><h1>User Profile&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;{{ question.author }} </h1></p>
 
 
-    <p><h1>User Profile&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;{{ question.author }} </h1></p>
+
+
 
 
     
@@ -16,6 +18,9 @@
 <div style="margin-top:20px">
 
     <h3>All Questions</h3>
+
+    {% for question in question_list %}
+    
     
         <p><a href="">{{ question.title }}</a>&nbsp;&nbsp;||&nbsp;&nbsp;<a class="red" href="{% url 'delete-question' pk=question.pk %}">Delete</a></p>
 
@@ -26,6 +31,7 @@
 
         <p>{{ question.ques_date_added }}</p>
 
+        
     {% endfor %}
 
 </div>
