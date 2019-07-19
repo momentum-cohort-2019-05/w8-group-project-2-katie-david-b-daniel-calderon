@@ -8,6 +8,8 @@ from .forms import AddQuestionForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 
 def index(request):
@@ -41,6 +43,7 @@ def question_detail(request, pk):
 
    return render(request, 'core/question_detail.html', context=context)
 
+@login_required
 def create_question(request):
     author = request.user
     if request.method == 'POST':
