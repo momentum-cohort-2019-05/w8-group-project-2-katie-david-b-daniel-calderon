@@ -17,7 +17,8 @@
 
     <h3>All Questions</h3>
     
-        <p><a href="">{{ question.title }}</a></p>
+        <p><a href="">{{ question.title }}</a>&nbsp;&nbsp;||&nbsp;&nbsp;<a class="red" href="{% url 'delete-question' pk=question.pk %}">Delete</a></p>
+
         
         <p>{{ question.ques_body }}</p>
 

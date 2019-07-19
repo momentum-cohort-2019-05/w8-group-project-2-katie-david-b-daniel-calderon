@@ -70,3 +70,11 @@ def user_profile(request, pk):
     }
     
     return render(request, 'core/user_profile.html', context)
+
+@login_required
+def delete_question(request, pk):
+    """deletes a question"""
+    question = Question.objects.get(pk=pk)
+    if request.user == question.author:
+        question.delete()
+    return redirect(to='index', pk=request.user.pk)
