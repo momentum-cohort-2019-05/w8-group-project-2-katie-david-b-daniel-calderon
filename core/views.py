@@ -29,7 +29,7 @@ def index(request):
 def question_detail(request, pk):
    question = get_object_or_404(Question, pk=pk)
    answers = Answer.objects.filter(question_answered=question)
-   answer = Answer.objects.all()
+   answer = question.answer_set.all()
 
 
    context = {
