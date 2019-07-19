@@ -49,4 +49,7 @@ class Star(models.Model):
     star_question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
     
     def __str__(self):
-        pass
+        if self.star_answer:
+            return f"{self.user}|{self.star_question.title}|{self.star_answer[:25]}"
+        else:
+            return f"{self.user}|{self.star_question.title}"
