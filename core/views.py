@@ -30,14 +30,12 @@ def question_detail(request, pk):
    question = get_object_or_404(Question, pk=pk)
    answers = Answer.objects.filter(question_answered=question)
    answer = Answer.objects.all()
-#    question_list = Question.objects.all()
 
 
    context = {
        'question': question,
        'answers': answers,
        'answer': answer,
-    #    'question_list': question_list,
 
    }
 
@@ -49,8 +47,6 @@ def create_question(request):
     if request.method == 'POST':
         form = AddQuestionForm(request.POST)
         if form.is_valid():
-            # question = Question.objects.create(author=author, title=form.cleaned_data['title'])
-            # question.save()
             question = form.save()
             return HttpResponseRedirect(reverse('question-detail', args=[question.pk]))
     else:
@@ -62,3 +58,15 @@ def create_question(request):
     }
 
     return render(request, 'core/new_question.html', context)
+
+@login_required
+def user_profile(request, pk):
+
+    all_questions = Question.objects.all()
+    question_list = all_questions.filter(pk=pk)
+        
+    context = {
+        'question_list': question_list
+    }
+    
+    return render(request, 'core/user_profile.html', context)
