@@ -68,8 +68,10 @@ def user_profile(request, pk):
     context = {
         'question_list': question_list,
     }
-    
+    # if request.user == Question.author:
     return render(request, 'core/user_profile.html', context)
+    # else: 
+        # return render(request, 'index.html')
 
 @login_required
 def delete_question(request, pk):
