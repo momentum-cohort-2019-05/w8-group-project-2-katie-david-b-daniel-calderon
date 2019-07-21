@@ -8,20 +8,29 @@
 
 {% if question %}
 
-        <p>{{ question.ques_body }}&nbsp;&nbsp;by:&nbsp;{{ question.author }}</p>
+    {% if request.user == question.author %}
 
-        <p>Added: {{ question.ques_date_added }}</p>
-
-            {% for ans in answer %}
-
-                <p>{{ ans.ans_body }}</p>
-
-            {% endfor %}
-
-
+        <p>{{ question.ques_body }}&nbsp;&nbsp;by:&nbsp;<a href="{% url 'user-profile' user.pk %}">{{ question.author }}</a></p>
+    
     {% else %}
 
-        <p>There are no questions in the list.</p>
+        <p>{{ question.ques_body }}&nbsp;&nbsp;by:&nbsp;{{ question.author }}</p>
+    
+    {% endif %}
+
+
+    <p>Added: {{ question.ques_date_added }}</p>
+
+        {% for ans in answer %}
+
+            <p>{{ ans.ans_body }}</p>
+
+        {% endfor %}
+
+
+{% else %}
+
+    <p>There are no questions in the list.</p>
 
 
 

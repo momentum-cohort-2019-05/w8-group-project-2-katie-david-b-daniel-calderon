@@ -63,20 +63,20 @@ def create_question(request):
 def user_profile(request, pk):
 
     all_questions = Question.objects.all()
-    question_list = all_questions.filter(author=request.user)
-    # question_list = all_questions.filter(author__pk=pk)
+    # question_list = all_questions.filter(author=request.user)
+    question_list = all_questions.filter(author__pk=pk)
+    author_list = all_questions.filter(author__pk=pk)
         
     context = {
         'question_list': question_list,
+        'author_list': author_list,
     }
     # question = Question.objects.get(pk=pk)
     # if request.user == question.author:
     #     all_questions = Question.objects.all()
     #     question_list = all_questions.filter(author__pk=pk)
     return render(request, 'core/user_profile.html', context)
-    # else:
-    #     return redirect(to='index')
-        # return render(request, 'index.html')
+
 
 @login_required
 def delete_question(request, pk):
