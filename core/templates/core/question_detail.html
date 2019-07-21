@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
 
 {% block content %}
-
-
 
 <h1>Question Detail - {{ question.title }}</h1>
 
@@ -32,11 +38,11 @@
 
     <p>There are no questions in the list.</p>
 
+{% endif %}
 
+<a href="{% url 'add-answer' %}">Add your answer for this question.</a>
 
-
-
-{% endif %}       
+<hr>
 
 <div><p>Back to&nbsp;<a href="{% url 'index' %}">all questions</a></p></div>
 

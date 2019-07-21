@@ -11,3 +11,8 @@ class AddQuestionForm(ModelForm):
     class Meta:
         model = Question
         fields = ['title', 'ques_body', 'author']
+
+class AddAnswerForm(ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['question_answered', 'ans_body', 'author']

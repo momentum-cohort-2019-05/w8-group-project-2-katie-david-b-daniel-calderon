@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+    <p>Add an answer</p>
+    <form action='' method='post'>
+        {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <button class="f6 link dim ph3 pv2 mb2 dib white bg-dark-green">Submit</button>
+    </form>
+
+{% endblock %}
