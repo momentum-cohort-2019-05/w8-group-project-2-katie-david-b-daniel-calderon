@@ -5,15 +5,7 @@
 
 
 <p><h1>User Profile&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;{{ question.author }} </h1></p>
-
-
-
-
-
-
     
-
-
 
 <div style="margin-top:20px">
 
@@ -31,10 +23,12 @@
 
         <p>{{ question.ques_date_added }}</p>
 
-        
+
     {% endfor %}
 
 </div>
+
+<div><p>Back to&nbsp;<a href="{% url 'index' %}">all questions</a></p></div>
 
 
 {% endblock %}

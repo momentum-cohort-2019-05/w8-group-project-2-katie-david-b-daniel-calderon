@@ -11,7 +11,15 @@
         <div><p><a href="{% url 'question-detail' question.pk %}">{{ question }}</a></p></div>
         <!-- <div><p>{{ question.title }}</p></div> -->
         <div><p>{{ question.ques_body }}</p></div>
-        <div><p>added by&nbsp;-&nbsp;<a href="{% url 'user-profile' user.pk %}">{{ question.author }}</a></p></div>
+        {% if request.user == question.author %}
+        
+            <div><p>added by&nbsp;-&nbsp;<a href="{% url 'user-profile' user.pk %}">{{ question.author }}</a></p></div>
+        
+        {% else %}
+            
+            <div><p>added by&nbsp;-&nbsp;{{ question.author }}</p></div>
+        
+        {% endif %}
         <!-- <div><p>{{ question.author }}</p></div> -->
         <div>added on&nbsp;-&nbsp;{{ question.ques_date_added }}
 
