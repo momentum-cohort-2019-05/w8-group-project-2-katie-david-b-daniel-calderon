@@ -1,6 +1,8 @@
 body {
-    padding: 20px;
-    font: 1em Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: #325050;
+    background: blueviolet;
+    font-family: 'Libre Baskerville', sans-serif;
+    font-size: 70%;
   }
 
   /* h1 {
