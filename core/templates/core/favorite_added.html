@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="faveadded">
+    {% if new_favorite %}
+        {% if created %}
+            <p>Question successfuly added to favorites.</p>
+            <br>
+            <p><a href="{% url 'user-favorites' %}">Go to your favorites </a> </p>
+        {% else %}
+            <p>Question successfuly removed from favorites.</p>
+            <br>
+            <p><a href="{% url 'user-favorites' %}">Go to your favorites </a> </p>
+        {% endif %}    
+    {% endif %}
+    </div>
+{% endblock %}

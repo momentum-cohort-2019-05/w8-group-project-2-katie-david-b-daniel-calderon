@@ -48,9 +48,9 @@ def create_question(request):
     if request.method == 'POST':
         form = AddQuestionForm(request.POST)
         if form.is_valid():
-            answer = form.save()
+            question = form.save()
             q = question.pk
-            return HttpResponseRedirect(reverse('question-detail', args=[q.pk]))
+            return HttpResponseRedirect(reverse('question-detail', args=[q]))
     else:
         form = AddQuestionForm()
 
@@ -67,8 +67,8 @@ def add_answer(request):
     if request.method == 'POST':
         form = AddAnswerForm(request.POST)
         if form.is_valid():
-            question = form.save()
-            return HttpResponseRedirect(reverse('question-detail', args=[question.pk]))
+            answer = form.save()
+            return HttpResponseRedirect(reverse('question-detail', args=[answer.question_answered_id]))
     else:
         form = AddAnswerForm()
         
@@ -105,6 +105,40 @@ def delete_question(request, pk):
     if request.user == question.author:
         question.delete()
     return redirect(to='index')
+
+
+@login_required
+def add_to_favorites(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+
+    new_favorite, created = Favorite.objects.get_or_create(
+        question=question, favorited_by=request.user)
+    if not created:
+        new_favorite.delete()
+
+    context = {
+        'question': question,
+        'new_favorite': new_favorite,
+        'created': created,
+    }
+
+    return render(request, 'core/favorite_added.html', context)
+
+@login_required
+def user_favorites(request):
+    favorites = Favorite.objects.filter(favorited_by=request.user)
+
+    favorites_list = []
+
+    for favorite in favorites:
+        favorites_list.append(favorite.question)
+
+    context = {
+        'favorites': favorites,
+        'favorites_list': favorites_list,
+    }
+
+    return render(request, 'core/added_favorites.html', context)
 
 # class UserProfileView(generic.ListView):
 #     model = Question
