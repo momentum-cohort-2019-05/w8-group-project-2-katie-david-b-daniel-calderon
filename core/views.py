@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
+
 def index(request):
     """View function for home page of site."""
 
@@ -142,6 +143,17 @@ def user_favorites(request):
     }
 
     return render(request, 'core/added_favorites.html', context)
+
+def mark_correct(request, answer_pk):
+    answer = Answer.objects.get(pk=answer_pk)
+    current_state = answer.correct
+    answer.correct = not current_state
+    question = answer.question_answered
+    context = {
+        'question': question,
+    }
+    
+    return render(request, 'core/question_detail.html', context=context)
 
 # class UserProfileView(generic.ListView):
 #     model = Question

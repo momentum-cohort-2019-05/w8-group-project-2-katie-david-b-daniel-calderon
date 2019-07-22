@@ -31,7 +31,9 @@
 
             <p>{{ ans.ans_body }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted by:&nbsp;&nbsp;{{ans.author}}</p>
             <p>submitted at&nbsp;&nbsp;{{ans.ans_date_added}}</p>
-
+           <p><a target="_blank" 
+                class="button" 
+                href="{% url 'mark-correct' ans.pk %}">Author approved.</a></p> 
         {% endfor %}
 
 
