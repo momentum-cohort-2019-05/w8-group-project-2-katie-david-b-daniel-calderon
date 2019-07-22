@@ -45,8 +45,8 @@ class Answer(models.Model):
 class Star(models.Model):
 
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    star_answer = models.ForeignKey(to=Answer, on_delete=models.CASCADE)
-    star_question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    star_answer = models.ForeignKey(to=Answer, on_delete=models.CASCADE, null=True)
+    star_question = models.ForeignKey(to=Question, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         if self.star_answer:
