@@ -105,3 +105,25 @@ def delete_question(request, pk):
     if request.user == question.author:
         question.delete()
     return redirect(to='index')
+
+# class UserProfileView(generic.ListView):
+#     model = Question
+#     template_name = 'core/user_profile.html'
+
+#     def get_queryset(self):
+#         """
+#         Return list of Question objects created by User (owner id specified in URL)
+#         """
+#         id = self.kwargs['pk']
+#         author = get_object_or_404(User, pk=id)
+#         return Question.objects.filter(author=target_author)
+
+#     def get_context_data(self, **kwargs):
+#         """
+#         Add question owner to context so they can be displayed in the template
+#         """
+#         # Call the base implementation first to get a context
+#         context = super(UserProfileView, self).get_context_data(**kwargs)
+#         # Get the owner object from the "pk" URL parameter and add it to the context
+#         context['author'] = get_object_or_404(User, pk=self.kwargs['pk'])
+#         return context
