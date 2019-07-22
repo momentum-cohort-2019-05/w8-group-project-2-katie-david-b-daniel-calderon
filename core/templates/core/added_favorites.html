@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="yourfavs">
+    {% if favorites %}
+    <p >Your favorite questions:</p>
+        <ul>
+        {% for question in favorites_list %}
+            <li>
+                <strong><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></strong>
+                <p>Author: {{ question.owner }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't added any questions to your favorites yet!</p>
+    {% endif %}
+    </div>
+{% endblock %}

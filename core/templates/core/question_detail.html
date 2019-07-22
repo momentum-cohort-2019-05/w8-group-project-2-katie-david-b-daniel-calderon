@@ -29,7 +29,7 @@
 
         {% for ans in answer %}
 
-            <p>{{ ans.ans_body }}</p>
+            <p>{{ ans.ans_body }}  {{ans.author}}</p>
 
         {% endfor %}
 
@@ -44,7 +44,13 @@
 
 <hr>
 
+<p><a href="{% url 'favorites' question.pk %}">Add to favorites</a></p>
+<button class="favorite" id="button-id" value="{{ question }}">Add to Favorites</button>
+
+<hr>
+
 <div><p>Back to&nbsp;<a href="{% url 'index' %}">all questions</a></p></div>
+
 
 
 
