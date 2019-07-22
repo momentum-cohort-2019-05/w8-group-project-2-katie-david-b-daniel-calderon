@@ -111,14 +111,14 @@ def delete_question(request, pk):
 def add_to_favorites(request, pk):
     question = get_object_or_404(Question, pk=pk)
 
-    new_favorite, created = Favorite.objects.get_or_create(
-        question=question, favorited_by=request.user)
+    new_star, created = Star.objects.get_or_create(
+        star_question=question, user=request.user)
     if not created:
-        new_favorite.delete()
+        new_star.delete()
 
     context = {
         'question': question,
-        'new_favorite': new_favorite,
+        'new_star': new_star,
         'created': created,
     }
 
@@ -126,16 +126,16 @@ def add_to_favorites(request, pk):
 
 @login_required
 def user_favorites(request):
-    favorites = Favorite.objects.filter(favorited_by=request.user)
+    stars = Star.objects.filter(favorited_by=request.user)
 
-    favorites_list = []
+    stars_list = []
 
-    for favorite in favorites:
-        favorites_list.append(favorite.question)
+    for star in stars:
+        stars_list.append(favorite.question)
 
     context = {
-        'favorites': favorites,
-        'favorites_list': favorites_list,
+        'stars': stars,
+        'stars_list': stars_list,
     }
 
     return render(request, 'core/added_favorites.html', context)

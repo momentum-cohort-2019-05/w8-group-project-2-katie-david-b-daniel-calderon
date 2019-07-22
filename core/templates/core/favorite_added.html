@@ -2,15 +2,15 @@
 
 {% block content %}
     <div class="faveadded">
-    {% if new_favorite %}
+    {% if new_star %}
         {% if created %}
-            <p>Question successfuly added to favorites.</p>
+            <p>Question successfuly starred.</p>
             <br>
-            <p><a href="{% url 'user-favorites' %}">Go to your favorites </a> </p>
+            <p><a href="{% url 'user-favorites' %}">Go to your starred questions. </a> </p>
         {% else %}
             <p>Question successfuly removed from favorites.</p>
             <br>
-            <p><a href="{% url 'user-favorites' %}">Go to your favorites </a> </p>
+            <p><a href="{% url 'user-favorites' %}">Go to your stars. </a> </p>
         {% endif %}    
     {% endif %}
     </div>

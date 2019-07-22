@@ -1,6 +1,7 @@
 body {
     color: #325050;
-    background: blueviolet;
+    /* background: blueviolet; */
+    background: rgb(181, 180, 182);
     font-family: 'Libre Baskerville', sans-serif;
     font-size: 70%;
   }
