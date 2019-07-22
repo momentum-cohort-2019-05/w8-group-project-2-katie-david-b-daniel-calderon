@@ -29,7 +29,8 @@
 
         {% for ans in answer %}
 
-            <p>{{ ans.ans_body }}  {{ans.author}}</p>
+            <p>{{ ans.ans_body }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted by:&nbsp;&nbsp;{{ans.author}}</p>
+            <p>submitted at&nbsp;&nbsp;{{ans.ans_date_added}}</p>
 
         {% endfor %}
 
@@ -44,9 +45,8 @@
 
 <hr>
 
-<p><a href="{% url 'favorites' question.pk %}">Add to favorites</a></p>
-<button class="favorite" id="button-id" value="{{ question }}">Add to Favorites</button>
 
+<a href="{% url 'favorites' question.pk %}"><button>Star this question</button></a>
 <hr>
 
 <div><p>Back to&nbsp;<a href="{% url 'index' %}">all questions</a></p></div>
