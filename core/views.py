@@ -4,11 +4,12 @@ from core.models import Question, Answer, Star
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
-from .forms import AddQuestionForm
+from .forms import AddQuestionForm, AddAnswerForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -47,8 +48,9 @@ def create_question(request):
     if request.method == 'POST':
         form = AddQuestionForm(request.POST)
         if form.is_valid():
-            question = form.save()
-            return HttpResponseRedirect(reverse('question-detail', args=[question.pk]))
+            answer = form.save()
+            q = question.pk
+            return HttpResponseRedirect(reverse('question-detail', args=[q.pk]))
     else:
         form = AddQuestionForm()
 
@@ -60,16 +62,41 @@ def create_question(request):
     return render(request, 'core/new_question.html', context)
 
 @login_required
+def add_answer(request):
+    author = request.user
+    if request.method == 'POST':
+        form = AddAnswerForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            return HttpResponseRedirect(reverse('question-detail', args=[question.pk]))
+    else:
+        form = AddAnswerForm()
+        
+    context = {
+        'form': form,
+        'author': author,
+    }
+
+    return render(request, 'core/add_answer.html', context)
+
+@login_required
 def user_profile(request, pk):
 
     all_questions = Question.objects.all()
+    # question_list = all_questions.filter(author=request.user)
     question_list = all_questions.filter(author__pk=pk)
+    author_list = all_questions.filter(author__pk=pk)
         
     context = {
         'question_list': question_list,
+        'author_list': author_list,
     }
-    
+    # question = Question.objects.get(pk=pk)
+    # if request.user == question.author:
+    #     all_questions = Question.objects.all()
+    #     question_list = all_questions.filter(author__pk=pk)
     return render(request, 'core/user_profile.html', context)
+
 
 @login_required
 def delete_question(request, pk):
@@ -78,3 +105,25 @@ def delete_question(request, pk):
     if request.user == question.author:
         question.delete()
     return redirect(to='index')
+
+# class UserProfileView(generic.ListView):
+#     model = Question
+#     template_name = 'core/user_profile.html'
+
+#     def get_queryset(self):
+#         """
+#         Return list of Question objects created by User (owner id specified in URL)
+#         """
+#         id = self.kwargs['pk']
+#         author = get_object_or_404(User, pk=id)
+#         return Question.objects.filter(author=target_author)
+
+#     def get_context_data(self, **kwargs):
+#         """
+#         Add question owner to context so they can be displayed in the template
+#         """
+#         # Call the base implementation first to get a context
+#         context = super(UserProfileView, self).get_context_data(**kwargs)
+#         # Get the owner object from the "pk" URL parameter and add it to the context
+#         context['author'] = get_object_or_404(User, pk=self.kwargs['pk'])
+#         return context
