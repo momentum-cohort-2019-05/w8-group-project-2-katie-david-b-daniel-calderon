@@ -13,7 +13,6 @@ urlpatterns = [
     path('add_answer/', views.add_answer, name='add-answer'),
     path('favorite_added/<int:pk>', views.add_to_favorites, name='favorites'),
     path('favorites/', views.user_favorites, name='user-favorites'),
-
-
+    path('mark-correct/<int:answer_pk>', views.mark_correct, name='mark-correct'),
 
 ]
