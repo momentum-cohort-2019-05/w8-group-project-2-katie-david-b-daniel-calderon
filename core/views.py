@@ -86,10 +86,13 @@ def user_profile(request, pk):
     # question_list = all_questions.filter(author=request.user)
     question_list = all_questions.filter(author__pk=pk)
     author_list = all_questions.filter(author__pk=pk)
+    all_star_ques = Star.objects.all()
+    star_list = all_star_ques.filter(star_question__pk=pk)
         
     context = {
         'question_list': question_list,
         'author_list': author_list,
+        'star_list': star_list,
     }
     # question = Question.objects.get(pk=pk)
     # if request.user == question.author:

@@ -6,12 +6,12 @@
         {% if created %}
             <p>Question successfuly starred.</p>
             <br>
-            <p><a href="{% url 'user-favorites' %}">Go to your starred questions. </a> </p>
-        {% else %}
+            <div><p>Back to&nbsp;<a href="{% url 'index' %}">all questions</a></p></div>
+            {% else %}
             <p>Question successfuly removed from favorites.</p>
             <br>
-            <p><a href="{% url 'user-favorites' %}">Go to your stars. </a> </p>
-        {% endif %}    
+            <div><p>Back to&nbsp;<a href="{% url 'index' %}">all questions</a></p></div>
+            {% endif %}    
     {% endif %}
     </div>
 {% endblock %}
