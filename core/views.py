@@ -5,10 +5,12 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from .forms import AddQuestionForm, AddAnswerForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import json
+
 
 
 
@@ -29,19 +31,30 @@ def index(request):
 
 
 def question_detail(request, pk):
-   question = get_object_or_404(Question, pk=pk)
-   answers = Answer.objects.filter(question_answered=question)
-   answer = question.answer_set.all()
+    question = get_object_or_404(Question, pk=pk)
+    answers = Answer.objects.filter(question_answered=question)
+    answer = question.answer_set.all()
+    form = AddAnswerForm
+    # author = request.user
+    # if request.method == 'POST':
+    #     form = AddAnswerForm(request.POST)
+    #     if form.is_valid():
+    #         answer = form.save()
+    #         return HttpResponseRedirect(reverse('question-detail', args=[answer.question_answered_id]))
+    # else:
+    #     form = AddAnswerForm()
+            
+     
+    context = {
+        'question': question,
+        'answers': answers,
+        'answer': answer,
+        'form': form,
+        # 'author': author,
 
+    }
 
-   context = {
-       'question': question,
-       'answers': answers,
-       'answer': answer,
-
-   }
-
-   return render(request, 'core/question_detail.html', context=context)
+    return render(request, 'core/question_detail.html', context=context)
 
 @login_required
 def create_question(request):
@@ -62,23 +75,50 @@ def create_question(request):
 
     return render(request, 'core/new_question.html', context)
 
+# @login_required
+# def add_answer(request):
+#     author = request.user
+#     if request.method == 'POST':
+#         form = AddAnswerForm(request.POST)
+#         if form.is_valid():
+#             answer = form.save()
+#             return HttpResponseRedirect(reverse('question-detail', args=[answer.question_answered_id]))
+#     else:
+#         form = AddAnswerForm()
+        
+#     context = {
+#         'form': form,
+#         'author': author,
+#     }
+
+#     # return render(request, 'core/add_answer.html', context)
+#     return render(request, 'core/question_detail.html', context=context)
+
 @login_required
 def add_answer(request):
-    author = request.user
     if request.method == 'POST':
-        form = AddAnswerForm(request.POST)
-        if form.is_valid():
-            answer = form.save()
-            return HttpResponseRedirect(reverse('question-detail', args=[answer.question_answered_id]))
-    else:
-        form = AddAnswerForm()
-        
-    context = {
-        'form': form,
-        'author': author,
-    }
+        answer_text = request.POST.get('the_answer')
+        response_data = {}
 
-    return render(request, 'core/add_answer.html', context)
+        answer = Answer(text=answer_text, author=request.user)
+        answer.save()
+
+        response_data['result'] = 'Create answer successful!'
+        response_data['postpk'] = answer.pk
+        response_data['text'] = answer.text
+        response_data['created'] = answer.ans_date_added.strftime('%B %d, %Y %I:%M %p')
+        response_data['author'] = answer.author.username
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
+
 
 @login_required
 def user_profile(request, pk):
