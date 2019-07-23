@@ -15,4 +15,4 @@ class AddQuestionForm(ModelForm):
 class AddAnswerForm(ModelForm):
     class Meta:
         model = Answer
-        fields = ['question_answered', 'ans_body', 'author']
+        fields = ['question_answered', 'text', 'author']

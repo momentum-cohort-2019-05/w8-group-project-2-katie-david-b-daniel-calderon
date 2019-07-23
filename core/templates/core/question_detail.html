@@ -36,6 +36,21 @@
                 href="{% url 'mark-correct' ans.pk %}">Author approved.</a></p> 
         {% endfor %}
 
+        <div class="row white">
+                <div class="columns large-12">
+                    <ul id="talk">
+                        {% for answer in all_answers %}
+                            <li>
+                                <strong>{{ answer.text }}</strong> -
+                                <em>{{ answer.author }}</em> -
+                                <span>{{ answer.ans_date_added }}</span> -
+                                <a id='delete-answer-{{answer.id}}'>delete me</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
 
 {% else %}
 
@@ -43,7 +58,17 @@
 
 {% endif %}
 
-<a href="{% url 'add-answer' %}">Add your answer for this question.</a>
+
+<p>Add an answer</p>
+<form id='answer-form' action='' method='post'>
+    {% csrf_token %}
+    <table>
+        {{ form.as_p }}
+    </table>
+    <button id='answer-form' class="f6 link dim ph3 pv2 mb2 dib white bg-dark-green">Submit</button>
+</form>
+
+<!-- <a href="{% url 'add-answer' %}">Add your answer for this question.</a> -->
 
 <hr>
 

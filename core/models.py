@@ -26,12 +26,12 @@ class Question(models.Model):
 
 class Answer(models.Model):
 
-    question_answered = models.ForeignKey(to=Question, on_delete=models.CASCADE)
-    ans_body = models.TextField()
+    question_answered = models.ForeignKey(to=Question, on_delete=models.CASCADE, null=True)
+    text = models.TextField(null=True)
     author = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     ans_date_added = models.DateField(auto_now_add=True)
     ans_likes = models.PositiveIntegerField(default=0)
-    correct = models.BooleanField()
+    correct = models.BooleanField(default=False)
 
     
     def __str__(self):
