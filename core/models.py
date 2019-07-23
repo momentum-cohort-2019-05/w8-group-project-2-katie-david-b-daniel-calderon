@@ -26,7 +26,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
 
-    question_answered = models.ForeignKey(to=Question, on_delete=models.CASCADE, null=True)
+    question_answered = models.ForeignKey(to=Question, on_delete=models.CASCADE)
     text = models.TextField(null=True)
     author = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     ans_date_added = models.DateField(auto_now_add=True)
@@ -35,7 +35,7 @@ class Answer(models.Model):
 
     
     def __str__(self):
-        return f"{self.question_answered.title}{self.ans_body}"
+        return f"{self.question_answered}{self.text}"
 
     def get_absolute_url(self):
         pass

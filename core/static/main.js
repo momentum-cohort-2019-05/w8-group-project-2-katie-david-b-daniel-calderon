@@ -13,7 +13,8 @@ $(function() {
         $.ajax({
             url : "add_answer/",
             type : "POST",
-            data : { the_answer : $('#id_text').val() },
+            data : { the_answer : $('#id_text').val(),
+                     the_question: $('#id_question_answered').val()},
             // handle a successful response
             success : function(json) {
                 $('#answer-text').val(''); // remove the value from the input

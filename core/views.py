@@ -35,6 +35,7 @@ def question_detail(request, pk):
     answers = Answer.objects.filter(question_answered=question)
     answer = question.answer_set.all()
     form = AddAnswerForm
+
     # author = request.user
     # if request.method == 'POST':
     #     form = AddAnswerForm(request.POST)
@@ -98,13 +99,16 @@ def create_question(request):
 def add_answer(request):
     if request.method == 'POST':
         answer_text = request.POST.get('the_answer')
+        question_id = int(request.POST.get('the_question'))
+        question_answered = get_object_or_404(Question, pk=question_id)
         response_data = {}
 
-        answer = Answer(text=answer_text, author=request.user)
+        answer = Answer(text=answer_text, author=request.user, question_answered=question_answered)
         answer.save()
 
         response_data['result'] = 'Create answer successful!'
         response_data['postpk'] = answer.pk
+        response_data['question_answered'] = answer.question_answered.pk
         response_data['text'] = answer.text
         response_data['created'] = answer.ans_date_added.strftime('%B %d, %Y %I:%M %p')
         response_data['author'] = answer.author.username

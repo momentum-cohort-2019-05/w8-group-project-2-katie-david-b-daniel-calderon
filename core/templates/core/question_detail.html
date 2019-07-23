@@ -29,7 +29,7 @@
 
         {% for ans in answer %}
 
-            <p>{{ ans.ans_body }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted by:&nbsp;&nbsp;{{ans.author}}</p>
+            <p>{{ ans.text }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted by:&nbsp;&nbsp;{{ans.author}}</p>
             <p>submitted at&nbsp;&nbsp;{{ans.ans_date_added}}</p>
            <p><a target="_blank" 
                 class="button" 
@@ -39,7 +39,7 @@
         <div class="row white">
                 <div class="columns large-12">
                     <ul id="talk">
-                        {% for answer in all_answers %}
+                        {% for answer in answers %}
                             <li>
                                 <strong>{{ answer.text }}</strong> -
                                 <em>{{ answer.author }}</em> -
