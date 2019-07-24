@@ -17,7 +17,7 @@ $(function() {
                      the_question: $('#id_question_answered').val()},
             // handle a successful response
             success : function(json) {
-                $('#answer-text').val(''); // remove the value from the input
+                $('#answer-form').val(''); // remove the value from the input
                 console.log(json); // log the returned json to the console
                 $("#talk").prepend("<li><strong>"+json.text+"</strong> - <em> "+json.author+"</em> - <span> "+json.created+
                     "</span> - <a id='delete-answer-"+json.answerpk+"'>delete me</a></li>");
