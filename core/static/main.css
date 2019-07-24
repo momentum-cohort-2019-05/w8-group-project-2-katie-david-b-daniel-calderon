@@ -3,10 +3,11 @@ body {
     /* background: blueviolet; */
     background: rgb(181, 180, 182);
     font-family: 'Libre Baskerville', sans-serif;
-    font-size: 70%;
+    font-size: 100%;
   }
 
-  /* h1 {
-      font: 20em Helvetica Neue, Helvetica, Arial, sans-serif;
-
-  } */
+.sidebar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

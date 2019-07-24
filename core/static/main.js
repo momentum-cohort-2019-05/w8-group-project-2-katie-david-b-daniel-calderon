@@ -22,8 +22,8 @@ $(function() {
                 $('#id_author').val(''); // remove the value from the input
                 console.log(document.getElementById('answer-form')) 
                 console.log(json); // log the returned json to the console
-                $("#talk").prepend("<li><strong>"+json.text+"</strong> - <em> "+json.author+"</em> - <span> "+json.created+
-                    "</span>  <a id='delete-answer-"+json.answerpk+"'></a></li>");
+                $("#talk").prepend("<strong>"+json.text+"</strong> - <em> "+json.author+"</em> - <span> "+json.created+
+                    "</span>  <a id='delete-answer-"+json.answerpk+"'></a>");
                 console.log("success"); // another sanity check
             },
             // handle a non-successful response

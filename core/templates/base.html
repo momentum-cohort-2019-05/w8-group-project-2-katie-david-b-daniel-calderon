@@ -9,28 +9,27 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
         <script src="{% static 'main.js' %}" defer></script>
         <link rel="stylesheet" href="{% static 'main.css' %}">
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
 
       </head>
       <body>
-        <h1> Got a question? Get an answer!</h1>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-2">
-            {% block sidebar %}
-              <ul class="sidebar-nav">
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <!-- <li><a href="">All questions</a></li>
-                <li><a href="">All answers</a></li> -->
+          <nav class="pa3 pa4-ns avenir">
+              <a class="link dim black b f1 f-headline-ns tc db mb3 mb4-ns" href="#" title="Home">Question Box</a>
+              <div class="tc pb3">
+                <a class="link dim gray f6 f5-ns dib mr3" href="{% url 'index' %}" title="Home">Home</a>
                 {% if user.is_authenticated %}
-                    <li>User: {{ user.get_username }}</li>
-                    <li><a href="{% url 'auth_logout'%}?next={{request.path}}">Logout</a></li>
+                <a class="link dim gray f6 f5-ns dib mr3" href="{% url 'auth_logout'%}?next={{request.path}}" title="Logout">Logout</a>
                 {% else %}
-                    <li><a href="{% url 'auth_login'%}?next={{request.path}}">Login</a></li>
-                {% endif %}
-              </ul>
-           {% endblock %}
-            </div>
-            <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
+                <a class="link dim gray f6 f5-ns dib mr3" href="{% url 'auth_login'%}?next={{request.path}}" title="Store">Loginb</a>
+               {% endif %}
+                <a class="link dim gray f6 f5-ns dib" href="#" title="Contact">Contact</a>
+              </div>
+            </nav>
+    
+            {% block sidebar %}
+              
+            {% endblock %}
+            <div class="ml5 avenir f5-ns">{% block content %}{% endblock %}</div>
           </div>
         </div>
       </body>
