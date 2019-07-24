@@ -27,27 +27,29 @@
 
     <p>Added: {{ question.ques_date_added }}</p>
 
-        {% for ans in answer %}
-
-            <p>{{ ans.text }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted by:&nbsp;&nbsp;{{ans.author}}</p>
-            <p>submitted on:&nbsp;&nbsp;{{ans.ans_date_added}}</p>
-           <p><a target="_blank" 
-                class="button" 
-                href="{% url 'mark-correct' ans.pk %}">Author approved.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="red" href="{% url 'delete-answer' pk=ans.pk %}">Delete Answer</a></p>
-        {% endfor %}
+        
 
         <div class="row white">
                 <div class="columns large-12">
-                    <ul id="talk">
+                    <div id="talk">
                         {% for answer in answers %}
-                            <li>
+                            <div>
                                 <strong>{{ answer.text }}</strong> -
                                 <em>{{ answer.author }}</em> -
-                                <span>{{ answer.ans_date_added }}</span> -
+                                <span>{{ answer.ans_date_added }}</span>
                                 <a id='delete-answer-{{answer.id}}'></a>
-                            </li>
+                            </div>
                         {% endfor %}
-                    </ul>
+                    </div>
+                    <div>
+                        {% for ans in answer %}
+
+                                
+                            <p><a target="_blank" 
+                                    class="button" 
+                                    href="{% url 'mark-correct' ans.pk %}">Author approved.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="red" href="{% url 'delete-answer' pk=ans.pk %}">Delete Answer</a></p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
 
@@ -58,8 +60,9 @@
 
 {% endif %}
 
+<hr>
 
-<p>Add an answer</p>
+<h2>Add an answer</h2>
 <form id='answer-form' action='' method='post'>
     {% csrf_token %}
     <table>
