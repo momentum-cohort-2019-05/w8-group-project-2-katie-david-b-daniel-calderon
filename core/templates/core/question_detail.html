@@ -30,16 +30,16 @@
         {% for ans in answer %}
 
             <p>{{ ans.text }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted by:&nbsp;&nbsp;{{ans.author}}</p>
-            <p>submitted at&nbsp;&nbsp;{{ans.ans_date_added}}</p>
+            <p>submitted on:&nbsp;&nbsp;{{ans.ans_date_added}}</p>
            <p><a target="_blank" 
                 class="button" 
-                href="{% url 'mark-correct' ans.pk %}">Author approved.</a></p> 
+                href="{% url 'mark-correct' ans.pk %}">Author approved.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="red" href="{% url 'delete-answer' pk=ans.pk %}">Delete Answer</a></p>
         {% endfor %}
 
         <div class="row white">
                 <div class="columns large-12">
                     <ul id="talk">
-                        {% for answer in answers %}
+                        {% for answer in all_answers %}
                             <li>
                                 <strong>{{ answer.text }}</strong> -
                                 <em>{{ answer.author }}</em> -

@@ -38,6 +38,7 @@ def question_detail(request, pk):
     answers = Answer.objects.filter(question_answered=question)
     answer = question.answer_set.all()
     form = AddAnswerForm
+    all_answers = get_object_or_404(Answer, pk=pk)
 
     # author = request.user
     # if request.method == 'POST':
@@ -54,6 +55,7 @@ def question_detail(request, pk):
         'answers': answers,
         'answer': answer,
         'form': form,
+        'all_answer': all_answers,
         # 'author': author,
 
     }
@@ -163,6 +165,15 @@ def delete_question(request, pk):
         question.delete()
     return redirect(to='index')
 
+@login_required
+def delete_answer(request, pk):
+    """deletes an answer"""
+    # question = Question.objects.get(pk=pk)
+    answer = Answer.objects.get(pk=pk)
+    if request.user == answer.author:
+        answer.delete()
+    return redirect(to='index')
+
 
 @login_required
 def add_to_favorites(request, pk):
@@ -208,24 +219,3 @@ def mark_correct(request, answer_pk):
     
     return render(request, 'core/question_detail.html', context=context)
 
-# class UserProfileView(generic.ListView):
-#     model = Question
-#     template_name = 'core/user_profile.html'
-
-#     def get_queryset(self):
-#         """
-#         Return list of Question objects created by User (owner id specified in URL)
-#         """
-#         id = self.kwargs['pk']
-#         author = get_object_or_404(User, pk=id)
-#         return Question.objects.filter(author=target_author)
-
-#     def get_context_data(self, **kwargs):
-#         """
-#         Add question owner to context so they can be displayed in the template
-#         """
-#         # Call the base implementation first to get a context
-#         context = super(UserProfileView, self).get_context_data(**kwargs)
-#         # Get the owner object from the "pk" URL parameter and add it to the context
-#         context['author'] = get_object_or_404(User, pk=self.kwargs['pk'])
-#         return context

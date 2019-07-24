@@ -15,5 +15,7 @@ urlpatterns = [
     path('favorite_added/<int:pk>', views.add_to_favorites, name='favorites'),
     path('favorites/', views.user_favorites, name='user-favorites'),
     path('mark-correct/<int:answer_pk>', views.mark_correct, name='mark-correct'),
+    path('delete-answer/<int:pk>', views.delete_answer, name='delete-answer'),
+
 
 ]
