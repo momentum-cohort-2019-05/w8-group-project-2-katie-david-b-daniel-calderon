@@ -44,7 +44,7 @@
                                 <strong>{{ answer.text }}</strong> -
                                 <em>{{ answer.author }}</em> -
                                 <span>{{ answer.ans_date_added }}</span> -
-                                <a id='delete-answer-{{answer.id}}'>delete me</a>
+                                <a id='delete-answer-{{answer.id}}'></a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -65,7 +65,7 @@
     <table>
         {{ form.as_p }}
     </table>
-    <button id='answer-form' class="f6 link dim ph3 pv2 mb2 dib white bg-dark-green">Submit</button>
+    <button id='answer-button' class="f6 link dim ph3 pv2 mb2 dib white bg-dark-green">Submit</button>
 </form>
 
 <!-- <a href="{% url 'add-answer' %}">Add your answer for this question.</a> -->

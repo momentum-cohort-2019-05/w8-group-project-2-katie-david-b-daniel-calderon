@@ -17,10 +17,13 @@ $(function() {
                      the_question: $('#id_question_answered').val()},
             // handle a successful response
             success : function(json) {
-                $('#answer-form').val(''); // remove the value from the input
+                $('#id_text').val(''); // remove the value from the input
+                $('#id_question_answered').val(''); // remove the value from the input
+                $('#id_author').val(''); // remove the value from the input
+                console.log(document.getElementById('answer-form')) 
                 console.log(json); // log the returned json to the console
                 $("#talk").prepend("<li><strong>"+json.text+"</strong> - <em> "+json.author+"</em> - <span> "+json.created+
-                    "</span> - <a id='delete-answer-"+json.answerpk+"'>delete me</a></li>");
+                    "</span>  <a id='delete-answer-"+json.answerpk+"'></a></li>");
                 console.log("success"); // another sanity check
             },
             // handle a non-successful response
