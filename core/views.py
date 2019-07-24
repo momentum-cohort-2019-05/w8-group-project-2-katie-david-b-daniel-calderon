@@ -10,6 +10,9 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import json
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 
@@ -122,6 +125,12 @@ def add_answer(request):
             json.dumps({"nothing to see": "this isn't happening"}),
             content_type="application/json"
         )
+
+        # subject = "Answer Added"
+        # message = "Someone submitted an answer to your question!"
+        # email_from = questionbox@gquestionbox.com
+        # recipient_list = 
+        # send_mail(subject, message, email_from, recipient_list)
 
 
 @login_required
