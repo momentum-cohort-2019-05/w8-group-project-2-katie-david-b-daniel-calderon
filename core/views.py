@@ -38,7 +38,7 @@ def question_detail(request, pk):
     answers = Answer.objects.filter(question_answered=question)
     answer = question.answer_set.all()
     form = AddAnswerForm
-    all_answers = get_object_or_404(Answer, pk=pk)
+    # all_answers = get_object_or_404(Answer, pk=pk)
 
     # author = request.user
     # if request.method == 'POST':
@@ -55,7 +55,7 @@ def question_detail(request, pk):
         'answers': answers,
         'answer': answer,
         'form': form,
-        'all_answer': all_answers,
+        # 'all_answer': all_answers,
         # 'author': author,
 
     }
